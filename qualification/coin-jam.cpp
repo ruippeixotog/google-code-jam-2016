@@ -1,77 +1,48 @@
-#include <algorithm>
-#include <cmath>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
 #include <vector>
-
-#define MAXN 2000
+#include <string>
 
 using namespace std;
 
-typedef long long ll;
-typedef long double ld;
+int j;
+vector<string> sols;
 
-int x[MAXN], y[MAXN];
-
-ll conv(ll n, int b) {
-  ll n2 = 0, mult = 1;
-  while(n != 0) {
-    n2 += mult * (n % 2);
-    mult *= b;
-    n /= 2;
+void putEven(string curr, int cnt, int k) {
+  if(sols.size() == j) return;
+  if(k >= curr.size() - 1) {
+    if(cnt == 0) sols.push_back(curr);
+    return;
   }
-  return n2;
+
+  putEven(curr, cnt, k + 2);
+  curr[k] = '1';
+  putEven(curr, cnt - 1, k + 2);
 }
 
-int primeFactor(ll n) {
-  for(int i = 2; i < (ll) ceil(sqrt(n)); i++) {
-    if(n % i == 0) return i;
-  }
-  return 0;
+void putOdd(string curr, int cnt, int k) {
+  if(sols.size() == j) return;
+  if(k >= curr.size() - 1) { putEven(curr, cnt, 2); return; }
+
+  putOdd(curr, cnt, k + 2);
+  curr[k] = '1';
+  putOdd(curr, cnt + 1, k + 2);
 }
 
 int main() {
-  int t;
-  scanf("%d", &t);
+  int t; scanf("%d", &t);
   for (int tc = 1; tc <= t; tc++) {
-    int n, j;
-    scanf("%d %d", &n, &j);
+    int n; scanf("%d %d", &n, &j);
+
+    string base;
+    for(int i = 0; i < n; i++)
+      base.push_back(i == 0 || i == n - 1 ? '1' : '0');
+
+    sols.clear();
+    putOdd(base, 0, 1);
 
     printf("Case #%d:\n", tc);
-    for(int i = (1 << (n - 1)); i < (1 << n) && j > 0; i++) {
-      if(i % 2 == 0) continue;
-
-      ll factors[10];
-      memset(factors, 0, sizeof(factors));
-
-      bool jamcoin = true;
-
-      for(int b = 2; b <= 10; b++) {
-        ll ib = conv(i, b);
-        ll factor = primeFactor(ib);
-
-        if(!factor) {
-          jamcoin = false;
-          break;
-        } else {
-          factors[b - 1] = factor;
-        }
-      }
-
-      if(jamcoin) {
-        printf("%lld", conv(i, 10));
-        for(int b = 1; b < 10; b++) {
-          printf(" %lld", factors[b]);
-        }
-        printf("\n");
-        j--;
-      }
+    for(string sol : sols) {
+      printf("%s 3 4 5 6 7 8 9 10 11\n", sol.c_str());
     }
   }
   return 0;

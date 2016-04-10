@@ -26,7 +26,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 
 * ✓ [A: Counting Sheep][qual1] (`counting-sheep`)
 * ✓ [B: Revenge of the Pancakes][qual2] (`revenge-of-the-pancakes`)
-* ✗ [C: Coin Jam][qual3] (`coin-jam`)
+* ✓ [C: Coin Jam][qual3] (`coin-jam`)
 * ✓ [D: Fractiles][qual4] (`fractiles`)
 
 [1]: https://code.google.com/codejam
