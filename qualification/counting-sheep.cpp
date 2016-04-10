@@ -3,8 +3,6 @@
 
 using namespace std;
 
-typedef long long ll;
-
 bool found[10];
 
 int main() {
