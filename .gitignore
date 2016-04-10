@@ -1,0 +1,10 @@
+*
+!/**/
+!*.*
+
+!Makefile
+*.in
+*.out
+*.exe
+
+.idea
