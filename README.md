@@ -32,6 +32,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 ### Round 1A
 
 * ✓ [A: The Last Word][round1a1] (`the-last-word`)
+* ✓ [A: Rank and File][round1a2] (`rank-and-file`)
 
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
@@ -39,3 +40,4 @@ The following is the list of the problems solved. Each problem identifier is spe
 [qual3]: https://code.google.com/codejam/contest/6254486/dashboard#s=p2
 [qual4]: https://code.google.com/codejam/contest/6254486/dashboard#s=p3
 [round1a1]: https://code.google.com/codejam/contest/4304486/dashboard#s=p0
+[round1a2]: https://code.google.com/codejam/contest/4304486/dashboard#s=p1
