@@ -35,6 +35,12 @@ The following is the list of the problems solved. Each problem identifier is spe
 * ✓ [B: Rank and File][round1a2] (`rank-and-file`)
 * ✓ [C: BFFs][round1a3] (`bffs`)
 
+### Round 1B
+
+* ✓ [A: Getting the Digits][round1b1] (`getting-the-digits`)
+* ✗ [B: Close Match][round1b2] (`close-match`)
+* ✗ [C: Technobabble][round1b3] (`technobabble`)
+
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
 [qual2]: https://code.google.com/codejam/contest/6254486/dashboard#s=p1
@@ -43,3 +49,6 @@ The following is the list of the problems solved. Each problem identifier is spe
 [round1a1]: https://code.google.com/codejam/contest/4304486/dashboard#s=p0
 [round1a2]: https://code.google.com/codejam/contest/4304486/dashboard#s=p1
 [round1a3]: https://code.google.com/codejam/contest/4304486/dashboard#s=p2
+[round1b1]: https://code.google.com/codejam/contest/11254486/dashboard#s=p0
+[round1b2]: https://code.google.com/codejam/contest/11254486/dashboard#s=p1
+[round1b3]: https://code.google.com/codejam/contest/11254486/dashboard#s=p2
