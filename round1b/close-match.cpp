@@ -66,10 +66,14 @@ void makeABitLarger(string& sl, string& ss, bool slIsCs, int st, int end) {
         string sl1 = sl, ss1 = ss;
         sl1[i] = '1'; ss1[i] = '0';
         makeEqual(sl1, ss1, st, i);
+        makeLargest(ss1, end + 1, (int) ss1.size());
+        makeSmallest(sl1, end + 1, (int) sl1.size());
 
         string sl2 = sl, ss2 = ss;
         sl2[i] = '0'; ss2[i] = '9';
         makeABitLarger(sl2, ss2, slIsCs, st, i);
+        makeLargest(ss2, end + 1, (int) ss2.size());
+        makeSmallest(sl2, end + 1, (int) sl2.size());
 
         if(better(slIsCs ? sl1 : ss1,
                   slIsCs ? ss1 : sl1,
@@ -100,7 +104,6 @@ void makeABitLarger(string& sl, string& ss, bool slIsCs, int st, int end) {
           break;
         }
       }
-      else cerr << "ERROR" << endl;
     }
   }
 }

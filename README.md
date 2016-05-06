@@ -38,7 +38,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 ### Round 1B
 
 * ✓ [A: Getting the Digits][round1b1] (`getting-the-digits`)
-* ✗ [B: Close Match][round1b2] (`close-match`)
+* ✓ [B: Close Match][round1b2] (`close-match`)
 * ✗ [C: Technobabble][round1b3] (`technobabble`)
 
 [1]: https://code.google.com/codejam
