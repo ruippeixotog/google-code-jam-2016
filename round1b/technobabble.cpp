@@ -1,59 +1,65 @@
-#include <algorithm>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <map>
-#include <queue>
-#include <set>
 #include <string>
-#include <utility>
-#include <vector>
 
-#define MAXN 2000
-
-#define IS_SET(var, pos) ((var) & (1 << (pos)))
+#define MAXN 1000
 
 using namespace std;
 
-typedef long long ll;
-typedef long double ld;
+map<string, int> w1Index, w2Index;
+bool graph[MAXN][MAXN];
 
-string w1[MAXN], w2[MAXN];
+bool seen[MAXN];
+int matchL[MAXN], matchR[MAXN];
+
+bool bpmDfs(int k) {
+  for(int i = 0; i < w2Index.size(); i++) {
+    if(graph[k][i]) {
+      if(seen[i]) continue;
+      seen[i] = true;
+
+      if(matchR[i] < 0 || bpmDfs(matchR[i])) {
+        matchL[k] = i; matchR[i] = k;
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+int bpm() {
+  memset(matchL, -1, sizeof(matchL));
+  memset(matchR, -1, sizeof(matchR));
+  int cnt = 0;
+  for(int i = 0; i < w1Index.size(); i++) {
+    memset(seen, false, sizeof(seen));
+    if(bpmDfs(i)) cnt++;
+  }
+  return cnt;
+}
 
 int main() {
   int t; scanf("%d", &t);
   for (int tc = 1; tc <= t; tc++) {
     int n; scanf("%d", &n);
-    for (int i = 0; i < n; i++)
-      cin >> w1[i] >> w2[i];
 
-    int best = 0;
-    for (int set = 0; set < (1 << n); set++) {
-      int count = 0; bool valid = true;
+    memset(graph, false, sizeof(graph));
+    w1Index.clear(); w2Index.clear();
 
-      for(int b = 0; b < n; b++) {
-        if(IS_SET(set, b)) continue;
-        count++;
-
-        bool found1 = false, found2 = false;
-        for(int b2 = 0; b2 < n; b2++) {
-          if(IS_SET(set, b2)) {
-            if (w1[b] == w1[b2]) found1 = true;
-            if (w2[b] == w2[b2]) found2 = true;
-          }
-        }
-
-        if(!found1 || !found2) {
-          valid = false;
-          break;
-        }
-      }
-
-      if(valid)
-        best = max(best, count);
+    for (int i = 0; i < n; i++) {
+      string w1, w2; cin >> w1 >> w2;
+      if(!w1Index.count(w1)) w1Index[w1] = (int) w1Index.size();
+      if(!w2Index.count(w2)) w2Index[w2] = (int) w2Index.size();
+      graph[w1Index[w1]][w2Index[w2]] = true;
     }
 
-    printf("Case #%d: %d\n", tc, best);
+    int matches = bpm();
+    int res = n - matches - (w1Index.size() - matches)
+              - (w2Index.size() - matches);
+
+    printf("Case #%d: %d\n", tc, res);
   }
   return 0;
 }
