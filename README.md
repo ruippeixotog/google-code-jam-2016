@@ -39,7 +39,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 
 * ✓ [A: Getting the Digits][round1b1] (`getting-the-digits`)
 * ✓ [B: Close Match][round1b2] (`close-match`)
-* ✗ [C: Technobabble][round1b3] (`technobabble`)
+* ✓ [C: Technobabble][round1b3] (`technobabble`)
 
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
