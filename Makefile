@@ -6,7 +6,7 @@ CC = g++
 all: $(BIN_FILES)
 
 .SECONDEXPANSION:
-$(BIN_FILES): %: $$(wildcard */$$**.cpp)
+$(BIN_FILES): %: $$(wildcard */$$*.cpp)
 	$(CC) $(CC_FLAGS) -o $@ $<
 
 clean:
