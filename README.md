@@ -41,6 +41,12 @@ The following is the list of the problems solved. Each problem identifier is spe
 * ✓ [B: Close Match][round1b2] (`close-match`)
 * ✓ [C: Technobabble][round1b3] (`technobabble`)
 
+### Round 1C
+
+* ✓ [A: Senate Evacuation][round1c1] (`senate-evacuation`)
+* ✓ [B: Slides!][round1c2] (`slides`)
+* ✗ [C: Fashion Police][round1c3] (`fashion-police`)
+
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
 [qual2]: https://code.google.com/codejam/contest/6254486/dashboard#s=p1
@@ -52,3 +58,6 @@ The following is the list of the problems solved. Each problem identifier is spe
 [round1b1]: https://code.google.com/codejam/contest/11254486/dashboard#s=p0
 [round1b2]: https://code.google.com/codejam/contest/11254486/dashboard#s=p1
 [round1b3]: https://code.google.com/codejam/contest/11254486/dashboard#s=p2
+[round1c1]: https://code.google.com/codejam/contest/4314486/dashboard#s=p0
+[round1c2]: https://code.google.com/codejam/contest/4314486/dashboard#s=p1
+[round1c3]: https://code.google.com/codejam/contest/4314486/dashboard#s=p2
