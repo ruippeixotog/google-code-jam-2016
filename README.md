@@ -45,7 +45,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 
 * ✓ [A: Senate Evacuation][round1c1] (`senate-evacuation`)
 * ✓ [B: Slides!][round1c2] (`slides`)
-* ✗ [C: Fashion Police][round1c3] (`fashion-police`)
+* ✓ [C: Fashion Police][round1c3] (`fashion-police`)
 
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
