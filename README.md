@@ -47,6 +47,11 @@ The following is the list of the problems solved. Each problem identifier is spe
 * ✓ [B: Slides!][round1c2] (`slides`)
 * ✓ [C: Fashion Police][round1c3] (`fashion-police`)
 
+### Round 2
+
+* ✗ [A: Rather Perplexing Showdown][round21] (`rather-perplexing-showdown`)
+* ✗ [B: Red Tape Committtee][round22] (`red-tape-committee`)
+
 [1]: https://code.google.com/codejam
 [qual1]: https://code.google.com/codejam/contest/6254486/dashboard#s=p0
 [qual2]: https://code.google.com/codejam/contest/6254486/dashboard#s=p1
