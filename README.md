@@ -49,7 +49,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 
 ### Round 2
 
-* ✗ [A: Rather Perplexing Showdown][round21] (`rather-perplexing-showdown`)
+* ✓ [A: Rather Perplexing Showdown][round21] (`rather-perplexing-showdown`)
 * ✗ [B: Red Tape Committtee][round22] (`red-tape-committee`)
 
 [1]: https://code.google.com/codejam
