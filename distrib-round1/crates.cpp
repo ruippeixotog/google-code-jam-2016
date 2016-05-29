@@ -1,25 +1,14 @@
-#include <algorithm>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
-#include <vector>
+#include <cstdlib>
 
 #include "crates.h"
 #include "message.h"
 
-#define MAXN 2000
-#define INF 1000000000
 #define MOD 1000000007
 
 using namespace std;
 
 typedef long long ll;
-typedef long double ld;
 
 int main() {
   int nodeBegin = (int) (MyNodeId() * GetNumStacks() / NumberOfNodes());
@@ -34,6 +23,7 @@ int main() {
   if(MyNodeId() != 0) {
     PutLL(0, sum); Send(0);
     Receive(0); sum = GetLL(0);
+
   } else {
     for(int k = 1; k < NumberOfNodes(); k++) {
       Receive(k); sum += GetLL(k);
@@ -43,7 +33,7 @@ int main() {
     }
   }
 
-  // -- phase 2: get back debts --
+  // -- phase 2: calculate back debts --
 
   ll backDebt = 0, localDebt = 0;
   for(int i = nodeBegin; i < nodeEnd; i++) {
@@ -61,7 +51,7 @@ int main() {
     Send(MyNodeId() + 1);
   }
 
-  // -- phase 3: compute --
+  // -- phase 3: compute number of moves --
 
   ll moves = 0; ll currDebt = backDebt;
   for(int i = nodeBegin; i < nodeEnd; i++) {
@@ -70,7 +60,6 @@ int main() {
 
     moves = (moves + abs(reqStackHeight - currHeight)) % MOD;
     currDebt = reqStackHeight - currHeight;
-//    cerr << "Debt after " << i << ": " << currDebt << endl;
   }
 
   if(MyNodeId() > 0) {
@@ -81,9 +70,7 @@ int main() {
   if(MyNodeId() < NumberOfNodes() - 1) {
     PutLL(MyNodeId() + 1, moves);
     Send(MyNodeId() + 1);
-
   } else {
-    if(currDebt != 0) cerr << "ERROR: " << currDebt << endl;
     printf("%lld\n", moves);
   }
 

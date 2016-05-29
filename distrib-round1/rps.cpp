@@ -1,35 +1,22 @@
 #include <algorithm>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
 #include <vector>
 
 #include "rps.h"
 #include "message.h"
 
-#define MAXN 2000
-#define INF 1000000000
-
 using namespace std;
-
-typedef long long ll;
-typedef long double ld;
 
 void play(vector<int>& currRound) {
   while(currRound.size() > 1) {
     vector<int> nextRound;
+
     for(int i = 0; i < currRound.size(); i += 2) {
       char moveLeft = GetFavoriteMove(currRound[i]);
       char moveRight = GetFavoriteMove(currRound[i + 1]);
 
-      int winner;
-      if(moveLeft == moveRight) winner = currRound[i];
-      else {
+      int winner = currRound[i];
+      if(moveLeft != moveRight) {
         winner = ((moveLeft == 'R' && moveRight == 'S') ||
                   (moveLeft == 'S' && moveRight == 'P') ||
                   (moveLeft == 'P' && moveRight == 'R')) ?
@@ -38,7 +25,6 @@ void play(vector<int>& currRound) {
       nextRound.push_back(winner);
     }
     currRound = nextRound;
-    nextRound.clear();
   }
 }
 
@@ -67,11 +53,11 @@ int main() {
   if(MyNodeId() == 0) {
     currRound.clear();
     for(int k = 0; k < activeNodes; k++) {
-      Receive(k); currRound.push_back(GetInt(k));
+      Receive(k);
+      currRound.push_back(GetInt(k));
     }
     play(currRound);
     printf("%d\n", currRound[0]);
   }
-
   return 0;
 }
