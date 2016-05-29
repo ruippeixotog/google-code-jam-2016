@@ -1,10 +1,10 @@
 *
 !/**/
 !*.*
-
 !Makefile
+
+.idea
 *.in
 *.out
 *.exe
-
-.idea
+distrib-*/*.h
