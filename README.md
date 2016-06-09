@@ -63,7 +63,7 @@ The following is the list of the problems solved. Each problem identifier is spe
 * ✓ [B: Oops][distribround12] (`oops`)
 * ✓ [C: Remarkably Parallel Scenario][distribround13] (`rps`)
 * ✓ [D: Rearranging Crates][distribround14] (`crates`)
-* ✗ [E: Winning Move][distribround15] (`winning_move`)
+* ✓ [E: Winning Move][distribround15] (`winning_move`)
 
 [1]: https://code.google.com/codejam
 [2]: https://code.google.com/codejam/distributed_index.html

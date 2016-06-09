@@ -20,6 +20,15 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+unsigned ehash(ll n) {
+  unsigned h = 31;
+  while (n > 0) {
+    h = (h * 54059) ^ ((int) (n % 10) * 76963);
+    n /= 10;
+  }
+  return h;
+}
+
 vector<ll> ebuf[100];
 vector<int> cntbuf[100];
 
@@ -32,9 +41,10 @@ int main() {
     numbers[GetSubmission(i)]++;
 
   for(auto entry: numbers) {
+    int node = (int) (ehash(entry.first) % NumberOfNodes());
 //    cerr << entry.first << " -> " << entry.second << endl;
-    ebuf[entry.first % NumberOfNodes()].push_back(entry.first);
-    cntbuf[entry.first % NumberOfNodes()].push_back(entry.second);
+    ebuf[node].push_back(entry.first);
+    cntbuf[node].push_back(entry.second);
   }
 
   for(int k = 0; k < NumberOfNodes(); k++) {
