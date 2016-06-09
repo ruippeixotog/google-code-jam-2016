@@ -1,24 +1,17 @@
 #include <algorithm>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
 #include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
 #include <vector>
 
 #include "winning_move.h"
 #include "message.h"
 
-#define MAXN 2000
-#define INF 1000000000
+#define MAX_NODES 100
+#define INF 2e18
 
 using namespace std;
 
 typedef long long ll;
-typedef long double ld;
 
 unsigned ehash(ll n) {
   unsigned h = 31;
@@ -29,8 +22,8 @@ unsigned ehash(ll n) {
   return h;
 }
 
-vector<ll> ebuf[100];
-vector<int> cntbuf[100];
+vector<ll> ebuf[MAX_NODES];
+vector<int> cntbuf[MAX_NODES];
 
 int main() {
   int nodeBegin = (int) (MyNodeId() * GetNumPlayers() / NumberOfNodes());
@@ -42,16 +35,15 @@ int main() {
 
   for(auto entry: numbers) {
     int node = (int) (ehash(entry.first) % NumberOfNodes());
-//    cerr << entry.first << " -> " << entry.second << endl;
     ebuf[node].push_back(entry.first);
     cntbuf[node].push_back(entry.second);
   }
 
   for(int k = 0; k < NumberOfNodes(); k++) {
     PutInt(k, (int) ebuf[k].size());
-//    cerr << MyNodeId() << " sending " << ebuf[k].size() << " numbers to " << k << endl;
     for(int i = 0; i < ebuf[k].size(); i++) {
-      PutLL(k, ebuf[k][i]); PutInt(k, cntbuf[k][i]);
+      PutLL(k, ebuf[k][i]);
+      PutInt(k, cntbuf[k][i]);
     }
     Send(k);
   }
@@ -61,16 +53,14 @@ int main() {
   for(int k = 0; k < NumberOfNodes(); k++) {
     Receive(k);
     int len = GetInt(k);
-//    cerr << "len: " << len << endl;
     for(int i = 0; i < len; i++) {
-      ll e = GetLL(k); int count = GetInt(k);
-      numbers[e] += count;
+      ll e = GetLL(k);
+      numbers[e] += GetInt(k);
     }
   }
 
-  ll winner = 0;
+  ll winner = INF;
   for(auto entry: numbers) {
-//    cerr << entry.first << " -> " << entry.second << endl;
     if(entry.second == 1) { winner = entry.first; break; }
   }
 
@@ -79,16 +69,9 @@ int main() {
   } else {
     for(int k = 1; k < NumberOfNodes(); k++) {
       Receive(k);
-      ll nodeWinner = GetLL(k);
-
-//      cerr << "nodeWinner " << k << " = " << nodeWinner << endl;
-
-      if(winner == 0) winner = nodeWinner;
-      else if(nodeWinner != 0) {
-        winner = min(winner, nodeWinner);
-      }
+      winner = min(winner, GetLL(k));
     }
-    printf("%lld\n", winner);
+    printf("%lld\n", winner == INF ? 0 : winner);
   }
 
   return 0;
