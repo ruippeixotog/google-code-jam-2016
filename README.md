@@ -65,6 +65,12 @@ The following is the list of the problems solved. Each problem identifier is spe
 * ✓ [D: Rearranging Crates][distribround14] (`crates`)
 * ✓ [E: Winning Move][distribround15] (`winning_move`)
 
+### Distributed Round 2
+
+* ✓ [B: ...we did it again][distribround22] (`again`)
+* ✓ [C: Lisp++][distribround23] (`lisp_plus_plus`)
+* ✗ [E: Gas Stations][distribround25] (`gas_stations`)
+
 [1]: https://code.google.com/codejam
 [2]: https://code.google.com/codejam/distributed_index.html
 [3]: https://code.google.com/codejam/distributed_guide.html
@@ -87,3 +93,6 @@ The following is the list of the problems solved. Each problem identifier is spe
 [distribround13]: https://code.google.com/codejam/contest/11264486/dashboard#s=p2
 [distribround14]: https://code.google.com/codejam/contest/11264486/dashboard#s=p3
 [distribround15]: https://code.google.com/codejam/contest/11264486/dashboard#s=p4
+[distribround22]: https://code.google.com/codejam/contest/7244486/dashboard#s=p1
+[distribround23]: https://code.google.com/codejam/contest/7244486/dashboard#s=p2
+[distribround25]: https://code.google.com/codejam/contest/7244486/dashboard#s=p4
