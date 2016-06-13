@@ -1,77 +1,46 @@
-#include <algorithm>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
-#include <vector>
 
 #include "lisp_plus_plus.h"
 #include "message.h"
 
-#define MAXN 2000
-#define INF 1000000000
-
 using namespace std;
 
 typedef long long ll;
-typedef long double ld;
-
-//string str = "())()()())";
-//string str = "(((((()))((())))))";
-//long long GetLength() { return str.size(); }
-//char GetCharacter(long long index) { return str[index]; }
 
 int main() {
-  int nodeBegin = (MyNodeId() * GetLength() / NumberOfNodes());
-  int nodeEnd = ((MyNodeId() + 1) * GetLength() / NumberOfNodes());
+  int nodeBegin = (int) (MyNodeId() * GetLength() / NumberOfNodes());
+  int nodeEnd = (int) ((MyNodeId() + 1) * GetLength() / NumberOfNodes());
 
-  ll backOpens = 0, cnt = 0;
+  ll back = 0, fwd = 0;
   for(int i = nodeBegin; i < nodeEnd; i++) {
-    if(GetCharacter(i) == '(') cnt++;
-    else if(cnt == 0) backOpens--;
-    else cnt--;
+    if(GetCharacter(i) == '(') fwd++;
+    else if(fwd == 0) back++;
+    else fwd--;
   }
-  PutLL(0, -backOpens);
-  PutLL(0, cnt);
+  PutLL(0, back);
+  PutLL(0, fwd);
   Send(0);
 
-  if(MyNodeId() == 0) {
-    int backMissing = -1;
-    ll balance = 0;
+  if(MyNodeId() != 0) return 0;
 
-    for(int k = 0; k < NumberOfNodes(); k++) {
-      Receive(k);
-      ll bk = GetLL(k), fk = GetLL(k);
-//      cerr << bk << " " << fk << endl;
-      if(backMissing > -1) continue;
+  int k; ll balance = 0;
+  for(k = 0; k < NumberOfNodes(); k++) {
+    Receive(k);
+    back = GetLL(k), fwd = GetLL(k);
 
-      if(balance - bk < 0) {
-        backMissing = k;
-      } else {
-        balance = balance - bk + fk;
-      }
-    }
+    if(balance - back < 0) break;
+    balance = balance - back + fwd;
+  }
 
-    if(backMissing == -1) {
-      if(balance == 0) printf("-1\n");
-      else printf("%lld\n", GetLength());
-    }
-    else {
-      int kNodeBegin = (backMissing * GetLength() / NumberOfNodes());
-      int kNodeEnd = ((backMissing + 1) * GetLength() / NumberOfNodes());
+  if(k == NumberOfNodes()) {
+    printf("%lld\n", balance == 0 ? -1 : GetLength());
+  } else {
+    int kNodeBegin = (int) (k * GetLength() / NumberOfNodes());
+    int kNodeEnd = (int) ((k + 1) * GetLength() / NumberOfNodes());
 
-      ll cnt = balance;
-      for(int i = kNodeBegin; i < kNodeEnd; i++) {
-        if(GetCharacter(i) == '(') cnt++;
-        else if(--cnt < 0) {
-          printf("%d\n", i);
-          break;
-        }
-      }
+    for(int i = kNodeBegin; i < kNodeEnd; i++) {
+      if(GetCharacter(i) == '(') balance++;
+      else if(--balance < 0) { printf("%d\n", i); break; }
     }
   }
   return 0;
