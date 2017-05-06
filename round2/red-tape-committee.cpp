@@ -1,80 +1,45 @@
 #include <algorithm>
 #include <cstdio>
 #include <cstring>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <utility>
-#include <vector>
 
 #define MAXN 200
-#define INF 1000000000
 
 using namespace std;
 
-typedef long long ll;
 typedef long double ld;
 
 int n, k;
 ld p[MAXN];
 
-//ld dp[MAXN + 1][MAXN + 1];
-
-vector<int> sol;
-
-ld bf2(int curr, int yesCnt, ld pAcc) {
-  if(curr == sol.size()) {
-    return (yesCnt == sol.size() / 2) ? pAcc : 0.0;
-  }
-
-  return
-    bf2(curr + 1, yesCnt + 1, pAcc * p[sol[curr]]) +
-    bf2(curr + 1, yesCnt, pAcc * (1.0 - p[sol[curr]]));
-}
-
-ld bf(int curr) {
-  if(sol.size() == k) return bf2(0, 0, 1.0);
-
-  sol.push_back(curr);
-  ld p1 = bf(curr + 1);
-  sol.pop_back();
-
-  if((n - curr - 1) >= (k - sol.size()))
-    p1 = max(p1, bf(curr + 1));
-
-  return p1;
-}
+ld com[MAXN], dp[MAXN + 1][MAXN / 2 + 1];
 
 int main() {
   int t; scanf("%d", &t);
   for(int tc = 1; tc <= t; tc++) {
     scanf("%d %d", &n, &k);
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
       scanf("%Lf", &p[i]);
 
-    ld sol = bf(0);
+    sort(p, p + n);
 
-//    memset(dp, 0, sizeof(dp));
-//    dp[0][0] = 1.0;
-//
-//    for(int i = 0; i < n; i++) {
-//      ld dpNew[MAXN + 1][MAXN + 1];
-//      memcpy(dpNew, dp, sizeof(dp));
-//
-//      for(int yes = 0; yes <= i; yes++) {
-//        for(int no = 0; no <= i; no++) {
-//          dpNew[yes + 1][no] = max(dpNew[yes + 1][no], dp[yes][no] * p[i]);
-//          dpNew[yes][no + 1] = max(dpNew[yes][no + 1], dp[yes][no] * (1.0 - p[i]));
-//        }
-//      }
-//
-//      memcpy(dp, dpNew, sizeof(dp));
-//    }
+    ld best = 0.0;
+    for(int k0 = 0; k0 <= k; k0++) {
+      for(int i = 0; i < k0; i++) com[i] = p[i];
+      for(int i = 0; i < k - k0; i++) com[k0 + i] = p[n - i - 1];
 
-//    printf("Case #%d: %Lf\n", tc, dp[k / 2][k / 2]);
-    printf("Case #%d: %.8Lf\n", tc, sol);
+      memset(dp, 0, sizeof(dp));
+      dp[0][0] = 1.0;
+
+      for(int i = 0; i < k; i++) {
+        for(int j = 0; j <= k / 2; j++) {
+          dp[i + 1][j + 1] += dp[i][j] * com[i];
+          dp[i + 1][j] += dp[i][j] * (1.0 - com[i]);
+        }
+      }
+      best = max(best, dp[k][k / 2]);
+    }
+
+    printf("Case #%d: %.9Lf\n", tc, best);
   }
   return 0;
 }
